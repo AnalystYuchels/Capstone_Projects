@@ -1,0 +1,16 @@
+:root {
+  --bs-body-font-family: 'Lato', sans-serif;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.nav-link {
+  color: #50589C;
+}
+
+.nav-link.active {
+  background-color: #3C467B !important;
+}
