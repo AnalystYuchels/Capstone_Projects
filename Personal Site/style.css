@@ -26,7 +26,7 @@ body {
 }
 
 .custom-border-color {
-  border-color: #d09cfb !important;
+  border-color: #e5b7f6 !important;
 }
 
 .btn-primary {
@@ -45,4 +45,13 @@ body {
 
 .btn-outline-secondary:hover {
   background-color: #450693;
+}
+
+.btn:focus, .btn:active {
+  background-color: inherit !important;
+  border-color: inherit !important;
+}
+
+.bi {
+  color: #785186;
 }
