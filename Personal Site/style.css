@@ -5,12 +5,44 @@
 body {
   margin: 0;
   padding: 0;
+  background-image: radial-gradient(circle, #f7f2d8, #ebc5f1);
+}
+
+.site {
+  color: #FF3F7F;
+  font-weight: 750;
 }
 
 .nav-link {
-  color: #50589C;
+  color: #8C00FF;
 }
 
 .nav-link.active {
-  background-color: #3C467B !important;
+  background-color: #450693 !important;
+}
+
+.nav-link:hover {
+  color: #450693;
+}
+
+.custom-border-color {
+  border-color: #d09cfb !important;
+}
+
+.btn-primary {
+  background-color: #450693;
+  border: none;
+}
+
+.btn-outline-secondary {
+  color: #8C00FF;
+  border-color: #8C00FF;
+}
+
+.btn-primary:hover {
+  background-color: #8C00FF;
+}
+
+.btn-outline-secondary:hover {
+  background-color: #450693;
 }
