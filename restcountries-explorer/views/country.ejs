@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Details about <%= country.name %>">
+  <title>Document</title>
+  <link rel="stylesheet" href="../public/styles/main.css">
+</head>
+<body>
+  
+  <header class="site-header">
+    <div class="header-inner">
+      <h1>🌍 RestCountries Explorer</h1>
+      <a href="/" class="back-btn">← Search Again</a>
+    </div>
+  </header>
+
+  <main class="main-content">
+    <article class="country-card">
+
+      <!-- Flag -->
+      <figure class="flag-wrapper">
+        <img 
+          src="<%= country.flag %>" 
+          alt="<%= country.flagAlt %>"
+          class="flag"
+          loading="lazy"
+        >
+      </figure>
+
+      <!-- Country Name -->
+      <div class="country-title">
+        <h2><%= country.name %></h2>
+        <p class="official-name"><%= country.officialName %></p>
+      </div>
+
+      <!-- Country Details Grid -->
+      <ul class="details-list">
+
+        <li class="detail-item">
+          <span class="label">🗺️ Region</span>
+          <span class="value"><%= country.region %> / <%= country.subregion %></span>
+        </li>
+
+        <li class="detail-item">
+          <span class="label">🏙️ Capital</span>
+          <span class="value"><%= country.capital %></span>
+        </li>
+
+        <li class="detail-item">
+          <span class="label">👥 Population</span>
+          <span class="value"><%= country.population %></span>
+        </li>
+
+        <li class="detail-item">
+          <span class="label">🗣️ Languages</span>
+          <span class="value"><%= country.languages %></span>
+        </li>
+
+        <li class="detail-item">
+          <span class="label">💰 Currency</span>
+          <span class="value"><%= country.currencies %></span>
+        </li>
+
+        <li class="detail-item">
+          <span class="label">🕐 Timezone</span>
+          <span class="value"><%= country.timezone %></span>
+        </li>
+
+        <li class="detail-item">
+          <span class="label">🚗 Driving Side</span>
+          <span class="value"><%= country.drivingSide %></span>
+        </li>
+
+        <li class="detail-item">
+          <span class="label">🏛️ UN Member</span>
+          <span class="value"><%= country.unMember %></span>
+        </li>
+
+        <li class="detail-item">
+          <span class="label">🗺️ Independent</span>
+          <span class="value"><%= country.independent %></span>
+        </li>
+
+      </ul>
+
+      <!-- Google Maps Link - only shown if the API returned one -->
+      <% if (counry.googleMaps) { %>
+
+          href="<%= country.googleMaps %>"
+          target="blank"
+          rel="noopener noreferrer"
+          class="maps-btn"
+        >
+          📍 View on Google Maps
+        </a>
+      <% } %>
+
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <p>Powered by <a href="https://restcountries.com" target="_blank" rel="noopener noreferrer">REST Countries API</a></p>
+  </footer>
+  
+</body>
+</html>
