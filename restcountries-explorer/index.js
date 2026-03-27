@@ -2,7 +2,6 @@ import express from "express";
 import axios from "axios";
 import path from "path";
 import { fileURLToPath } from "url";
-import { error } from "console";
 
 // ES Module fix for __dirname
 const __filename = fileURLToPath(import.meta.url);
@@ -10,10 +9,10 @@ const __dirname = path.dirname(__filename);
 
 // App configuration
 const app = express();
-const port = process.env.port || 3000;
+const PORT = process.env.PORT || 3000;
 
 // Base URL for the REST Countries API
-const api_base_url = "https://restcountries.com/v3.1";
+const API_BASE_URL = "https://restcountries.com/v3.1";
 
 // Middleware
 // Serve static files from /public
@@ -74,7 +73,7 @@ app.post("/search", async (req,res) => {
   try {
     // Call the REST Countries API with the search term
     const { data } = await axios.get(
-      `${api_base_url}/name/${encodeURIComponent(countryName)}`
+      `${API_BASE_URL}/name/${encodeURIComponent(countryName)}`
     );
     
     // Format the first result from the returned array
@@ -115,6 +114,6 @@ app.use((err, req,res, next) => {
 });
 
 // Start server
-app.listen(port, () => {
-  console.log(`Server running at http://localhost:${port}`);
+app.listen(PORT, () => {
+  console.log(`Server running at http://localhost:${PORT}`);
 });
