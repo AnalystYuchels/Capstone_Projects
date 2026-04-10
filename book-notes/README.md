@@ -60,7 +60,26 @@ PORT=3000
 
 Run `whoami` in your terminal to find your postgres username.
 
-### 4. Run the development server
+
+### 4. File Structure
+```
+book-notes/
+├── public/              ← Static files served directly to the browser
+│   ├── styles.css
+│   └── script.js
+├── views/               ← EJS templates (HTML with injected data)
+│   ├── index.ejs        ← Homepage — lists all books
+│   ├── add.ejs          ← Form to add a new book
+│   └── edit.ejs         ← Form to edit an existing book
+├── .env                 ← Your secrets — DB credentials. NEVER commit this.
+├── .gitignore           ← Tells Git what to ignore
+├── db.js                ← PostgreSQL connection. One file, imported everywhere.
+├── index.js             ← Express server — all your routes live here
+├── package.json         ← Project metadata and dependency list
+└── README.md            ← Instructions for running the project
+```
+
+### 5. Run the development server
 ```bash
 npm run dev
 ```
