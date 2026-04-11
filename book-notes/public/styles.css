@@ -240,18 +240,25 @@ header h1 {
   background: var(--terracota-hover);
 }
 
-.btn-secondary {
-  display: inline-block;
-  background: transparent;
-  color: var(--terracotta);
-  border: 1px solid var(--terracotta);
-  border-radius: var(--radius);
-  padding: 0.5rem 1rem;
+.btn-secondary,
+.btn-danger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 36px;
+  padding: 0 1rem;
   font-family: var(--font-body);
   font-size: 0.85rem;
   cursor: pointer;
   text-decoration: none;
+  border-radius: var(--radius);
   transition: background 0.2s;
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--terracotta);
+  border: 1px solid var(--terracotta);
 }
 
 .btn-secondary:hover {
@@ -262,12 +269,6 @@ header h1 {
   background: transparent;
   color: var(--danger);
   border: 1px solid var(--danger);
-  border-radius: var(--radius);
-  padding: 0.5rem 1rem;
-  font-family: var(--font-body);
-  font-size: 0.85rem;
-  cursor: pointer;
-  transition: background 0.2s;
 }
 
 .btn-danger:hover {
