@@ -68,6 +68,16 @@ header h1 {
   opacity: 0.7;
 }
 
+.small-link {
+  display: inline;
+  color: var(--terracotta);
+  text-decoration: none;
+}
+
+.small-link:hover {
+  opacity: 0.7;
+}
+
 /* Sort Bar */
 .sort-bar {
   display: flex;
@@ -328,6 +338,12 @@ header h1 {
 .book-form textarea:focus {
   outline: none;
   border-color: var(--terracotta);
+}
+
+.book-form input::placeholder,
+.book-form textarea::placeholder {
+  font-size: 0.85rem;
+  color: var(--border);
 }
 
 .book-form textarea {

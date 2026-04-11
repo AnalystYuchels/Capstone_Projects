@@ -13,8 +13,8 @@
   
   <header>
     <h1>My Book Notes</h1>
-    <p class="subtitle">Books I've read - with notes, ratings, and thoughts.'</p>
-    <a href="/add" class="btn-primary">+ Add a Book</a>
+    <p class="subtitle">Books I've read - with notes, ratings, and thoughts.</p>
+    <a href="/add" class="btn-primary">Add a Book</a>
   </header>
 
   <!-- Sort Bar -->
@@ -59,7 +59,7 @@
         <!-- Book Details -->
         <div class="book-info">
           <h2 class="book-title"><%= book.title %></h2>
-          <p class="book-author">by <%= book.book-author %></p>
+          <p class="book-author">by <%= book.author %></p>
 
           <% if (book.rating) { %>
             <p class="book-rating">⭐️ <%= book.rating %>/10</p>
