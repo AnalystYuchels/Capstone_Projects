@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Book Notes</title>
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+</head>
+<body>
+  
+  <header>
+    <h1>My Book Notes</h1>
+    <p class="subtitle">Books I've read - with notes, ratings, and thoughts.'</p>
+    <a href="/add" class="btn-primary">+ Add a Book</a>
+  </header>
+
+  <!-- Sort Bar -->
+  <!-- 
+    Each link adds a ?sort= query parameter to the URL.
+    When clicked, the browser makes a GET / request with that parameter.
+    The server reads it and returns data sorted accordingly.
+   -->
+  <nav class="sort-bar">
+    <span>Sort by:</span>
+    <a href="/?sort=recency" class="<%= sort === 'recency' ? 'active' : '' %>">Most Recent</a>
+    <a href="/?sort=rating" class="<%= sort === 'rating' ? 'active' : '' %>">Highest Rated</a>
+    <a href="/?sort=title" class="<%= sort === 'title' ? 'active' : '' %>">Title (A-Z)</a>
+  </nav>
+
+  <!-- Book Grid -->
+  <main class="book-grid">
+    <% books.forEach(function(book) { %>
+
+      <article class="book-card">
+
+        <!-- Cover Image -->
+        <!-- 
+          The Open Library Covers API works without any API key.
+          Given an ISBN, the cover URL is simply this pattern:
+          https://covers.openlibrary.org/b/isbn/YOUR_ISBN-M.jpg
+          Sizes: -S (small), -M (medium), -L (large)
+        -->
+        <div class="cover-wrap">
+          <% if (book.isbn) { %>
+            <img
+              src="https://covers.openlibrary.org/b/isbn/<%= book.isbn %>-M.jpg"
+              alt="Cover of <%= book.title %>"
+              class="book-cover"
+              onerror="this.style.display='none'; this.parentElement.classList.add('no-cover-bg');"
+            >
+          <% } else { %>
+            <div class="no-cover">No cover available</div>
+          <% } %>
+        </div>
+
+        <!-- Book Details -->
+        <div class="book-info">
+          <h2 class="book-title"><%= book.title %></h2>
+          <p class="book-author">by <%= book.book-author %></p>
+
+          <% if (book.rating) { %>
+            <p class="book-rating">⭐️ <%= book.rating %>/10</p>
+          <% } %>
+
+          <% if (book.date_read) { %>
+            <!-- 
+              book.date_read comes from PostgreSQL as a JavaScript Date object.
+              toLocaleDateString formats it as a human-readable string.
+            -->
+            <p class="book-date">
+              Read: <%= new Date(book.date_read).toLocaleDateString('en-US', { year: 'numeric', month: 'long' }) %>
+            </p>
+          <% } %>
+
+          <% if (book.notes) { %>
+            <p class="book-notes"><%= book.notes %></p>
+          <% } %>
+
+          <!-- Action Buttons -->
+          <div class="book-actions">
+            <!-- 
+              Edit link goes to /edit/5 (using the book's id).
+              The server's GET /edit/:id route handles this.
+            -->
+            <a href="/edit/<%= book.id %>" class="btn-secondary">Edit</a>
+
+            <!-- 
+              Delete uses a <form> with POST because HTML can't send DELETE requests.
+              action="/delete/5" targets our POST /delete/:id route.
+              The confirm() dialog asks the user before submitting.
+              onsubmit="return confirm(...)" — if the user clicks Cancel,
+              confirm() returns false, and "return false" stops the form from submitting.
+            -->
+            <form 
+              action="/delete/<%= book.id %>"
+              method="POST"
+              class="delete-form"
+              onsubmit="return confirm('Delete \'<%= book.title %>\'? This cannot be undone.')"
+            >
+                <button type="submit" class="btn-danger">Delete</button>
+            </form>
+          </div>
+        </div>
+      </article>
+      
+    <% }); %>
+
+    <!-- 
+      Empty state: shown when there are no books yet.
+      books.length === 0 is a plain JavaScript condition inside EJS.
+    -->
+    <% if (books.length === 0) { %>
+      <p class="empty-state">
+        No books yet. <a href="/add">Add your frist one →</a>
+      </p>
+    <% } %>
+    
+  </main>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add a Book - My Book Notes</title>
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+</head>
+<body>
+  
+  <header>
+    <a href="/" class="back-link">← Back to all books</a>
+    <h1>Add a Book</h1>
+  </header>
+
+  <main class="form-page">
+    <!-- 
+      action="/add" — where the form submits to. Matches our POST /add route.
+      method="POST" — sends data in the request body, not the URL.
+      WHY POST and not GET: GET puts data in the URL (?title=...&author=...).
+      That's visible, bookmarkable, and limited in length. POST sends data
+      in the request body — not visible in the URL, no length limit.
+    -->
+    <form action="/add" method="POST" class="book-form">
+
+      <div class="form-group">
+        <label for="title">Book Title</label>
+        <input type="text" id="title" name="title" placeholder="e.g. Thinking, Fast and Slow" required>
+      </div>
+
+      <div class="form-group">
+        <label for="author">Author *</label>
+        <input type="text" id="author" name="authr" placeholder="e.g. Daniel Kahneman" required>
+      </div>
+
+      <div class="form-group">
+        <label for="isbn">ISBN <span class="optional">(for cover art)</span></label>
+        <input type="text" id="isbn" name="isbn" placeholder="e.g. 9780374533557">
+        <small>Find the ISBN on the back cover or at openlibrary.org. Used to fetch the cover automatically.</small>
+      </div>
+
+      <div class="form-group">
+        <label for="rating">Your Rating <span class="optional">(1-10)</span></label>
+        <input type="number" id="rating" name="rating" min="1" max="10" placeholder="8">
+      </div>
+
+      <div class="form-group">
+        <label for="date_read">Date Read</label>
+        <input type="date" id="date_read" name="date_read">
+      </div>
+
+      <div class="form-group">
+        <label for="notes">Your Notes</label>
+        <textarea name="notes" id="notes" rows="8" placeholder="What were the key ideas? What will you remember in a year?"></textarea>
+      </div>
+
+      <button type="submit" class="btn-primary">Save Book</button>
+
+    </form>
+  </main>
+</body>
+</html>
