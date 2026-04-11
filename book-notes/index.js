@@ -100,14 +100,14 @@ app.get("/edit/:id", async (req, res) => {
 });
 
 // Receive updated form data, update the book in the DB
-app.post("edit/:id", async (req, res) => {
+app.post("/edit/:id", async (req, res) => {
   const { id } = req.params;
   const { title, author, isbn, rating, notes, date_read } = req.body;
 
   try {
     await db.query(
       `UPDATE books
-      SET title=$1, author=$2, isbn=$3, rating=$4, notes=$5, data_read=$6
+      SET title=$1, author=$2, isbn=$3, rating=$4, notes=$5, date_read=$6
       WHERE id=$7`,
       [title, author, isbn || null, rating || null, notes || null, date_read || null, id]
     );
