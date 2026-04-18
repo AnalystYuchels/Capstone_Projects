@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edit Book - Book Notes</title>
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+</head>
+<body>
+  
+  <header class="header-sm">
+    <a href="/" class="back-link">← Back to all books</a>
+    <h1>Edit Book</h1>
+  </header>
+
+  <main class="form-page">
+    <form action="/edit/<%= book.id %>" method="POST" class="book-form">
+      <div class="form-group">
+        <label for="title">Book Title</label>
+        <input type="text" name="title" id="title" value="<%= book.title %>" required>
+      </div>
+
+      <div class="form-group">
+        <label for="author">Author *</label>
+        <input type="text" name="author" id="author" value="<%= book.author %>" required>
+      </div>
+
+      <div class="form-group">
+        <label for="isbn">ISBN</label>
+        <!-- 
+          The || '' handles null values from the database.
+          If book.isbn is null (never set), value="null" would appear literally in the input.
+          || '' converts null to an empty string — the input appears blank.
+        -->
+        <input type="text" name="isbn" id="isbn" value="<%= book.isbn || '' %>">
+      </div>
+
+      <div class="form-group">
+        <label for="rating">Your Rating (1-10)</label>
+        <input type="number" name="rating" id="rating" min="1" max="10" value="<%= book.rating || '' %>">
+      </div>
+
+      <div class="form-group">
+        <label for="date_read">Date Read</label>
+        <!-- 
+          Dates from PostgreSQL arrive as full JavaScript Date objects.
+          toISOString() converts them to "2024-03-01T00:00:00.000Z".
+          .slice(0, 10) trims that to "2024-03-01" — exactly the format
+          the HTML date input expects. Without this, the field would appear empty.
+        -->
+        <input type="date" name="date_read" id="date_read" value="<%= book.date_read ? new Date(book.date_read).toISOString().slice(0, 10) : '' %>">
+      </div>
+
+      <div class="form-group">
+        <label for="notes">Your Notes</label>
+        <textarea name="notes" id="notes" rows="8"><%= book.notes || '' %></textarea>
+      </div>
+
+      <button type="submit" class="btn-primary">Update Book</button>
+
+    </form>
+  </main>
+
+</body>
+</html>
