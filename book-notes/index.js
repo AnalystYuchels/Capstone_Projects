@@ -12,7 +12,7 @@ const __dirname = dirname(__filename);
 
 // App setup
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT;
 
 // Middleware
 app.use(express.urlencoded({ extended: true }));
@@ -136,6 +136,6 @@ app.post("/delete/:id", async (req, res) => {
 });
 
 // Start the server
-app.listen(PORT, () => {
+app.listen(PORT, "0.0.0.0", () => {
   console.log(`📚 Book Notes running at http://localhost:${PORT}`);
 });
